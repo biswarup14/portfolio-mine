@@ -1,0 +1,10 @@
+.works {
+  flex-grow: 1;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: large;
+  margin: 15px;
+}
+
+.works h1 {
+  margin: 10px;
+}

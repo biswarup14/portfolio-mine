@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./components/globalStyles";
 import { lightTheme, darkTheme } from "./components/Theme";
-import { useDarkMode } from "./components/useDarkMode";
+import useDarkMode from "./components/useDarkMode";
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import About from "./components/About";

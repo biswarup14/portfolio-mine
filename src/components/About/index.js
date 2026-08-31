@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import {
-  FiGraduationCap,
   FiBriefcase,
   FiTarget,
   FiArrowRight,
 } from "react-icons/fi";
+import { FaGraduationCap } from "react-icons/fa";
 import "./style.css";
 
 const About = () => {
@@ -36,7 +36,7 @@ const About = () => {
         <div className="about-grid">
           <div className="about-card">
             <div className="card-icon">
-              <FiGraduationCap size={24} />
+              <FaGraduationCap size={24} />
             </div>
             <h3>Education</h3>
             <p className="card-sub">B.Tech, Computer Science</p>

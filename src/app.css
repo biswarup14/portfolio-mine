@@ -1,12 +1,12 @@
 .app {
   display: flex;
-  margin: auto;
-  max-width: 1280px;
-  padding: 0 15px;
-  min-height: 100vh;
   flex-direction: column;
+  min-height: 100vh;
 }
-.app .toggleBtn {
+
+.app-main {
+  flex: 1;
   display: flex;
-  margin: auto;
+  flex-direction: column;
+  width: 100%;
 }

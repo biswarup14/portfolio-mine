@@ -1,117 +1,87 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { FiHome, FiUser, FiCode, FiFolder, FiMail } from "react-icons/fi";
+import { RiMenuFill, RiCloseLine } from "react-icons/ri";
+import { FaSun, FaMoon } from "react-icons/fa";
 import "./style.css";
-import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 
-const NavBar = () => {
+const NAV_LINKS = [
+  { to: "/", label: "Home", icon: FiHome },
+  { to: "/about", label: "About", icon: FiUser },
+  { to: "/skills", label: "Skills", icon: FiCode },
+  { to: "/works", label: "Works", icon: FiFolder },
+  { to: "/contact", label: "Contact", icon: FiMail },
+];
+
+const NavBar = ({ theme, toggleTheme }) => {
   const [open, setOpen] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  const trackScreenWidth = () => {
-    const width = window.innerWidth;
-    setScreenWidth(width);
-    if (width > 800) {
-      setOpen(true);
-    }
-  };
-
-  const handleClose = () => {
-    if (screenWidth < 800) {
-      setOpen(false);
-    }
-  };
-
   useEffect(() => {
-    trackScreenWidth();
-    window.addEventListener("resize", trackScreenWidth);
-    return () => window.removeEventListener("resize", trackScreenWidth);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return (
-    <nav className="navbar">
-      <div className="nav-wrapper">
-        <div className="logo">
-          <Link to="/">
-            <HomeOutlinedIcon fontSize="large" color="primary" />
-          </Link>
-        </div>
-        <div className="list-wrapper">
-          <img
-            src="https://github.com/DwinaTech/public-images/blob/main/menu-bars.png?raw=true"
-            alt="Menu bars"
-            style={{ opacity: !open ? 1 : 0 }}
-            onClick={() => {
-              setOpen(!open);
-            }}
-          />
-          <img
-            src="https://github.com/DwinaTech/public-images/blob/main/cross-menu-icon.png?raw=true"
-            alt="Menu cross"
-            style={{ opacity: open ? 1 : 0 }}
-            onClick={() => {
-              setOpen(!open);
-            }}
-          />
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
 
-          <ul style={{ left: open ? "0" : "-100vw" }}>
-            <li>
+  return (
+    <header className={`navbar ${scrolled ? "scrolled" : ""}`}>
+      <nav className="nav-container" aria-label="Primary">
+        <Link to="/" className="logo" onClick={() => setOpen(false)}>
+          <span className="logo-mark">&lt;/&gt;</span>
+          <span className="logo-text">Biswarup</span>
+        </Link>
+
+        <ul className={`nav-links ${open ? "open" : ""}`}>
+          {NAV_LINKS.map(({ to, label, icon: Icon }) => (
+            <li key={to}>
               <Link
-                to="/"
-                onClick={handleClose}
-                style={{ color: location.pathname === "/" && "#4071f4" }}
+                to={to}
+                className={location.pathname === to ? "active" : ""}
+                aria-current={location.pathname === to ? "page" : undefined}
               >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/about"
-                onClick={handleClose}
-                style={{
-                  color: location.pathname === "/about" && "#4071f4",
-                }}
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/skills"
-                onClick={handleClose}
-                style={{
-                  color: location.pathname === "/skills" && "#4071f4",
-                }}
-              >
-                Skills
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/works"
-                onClick={handleClose}
-                style={{
-                  color: location.pathname === "/works" && "#4071f4",
-                }}
-              >
-                Works
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/contact"
-                onClick={handleClose}
-                style={{
-                  color: location.pathname === "/contact" && "#4071f4",
-                }}
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
+              <Icon size={18} />
+              <span>{label}</span>
+            </Link>
+          </li>
+        ))}
+
+        <div className="nav-links-contact">
+          <a
+            href="https://github.com/biswarup14"
+            className="nav-cta"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Hire Me
+          </a>
         </div>
-      </div>
-    </nav>
+      </ul>
+
+        <div className="nav-actions">
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+          >
+            {theme === "light" ? <FaMoon size={20} /> : <FaSun size={20} />}
+          </button>
+          <button
+            className="menu-toggle"
+            onClick={() => setOpen((o) => !o)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+          >
+            {open ? <RiCloseLine size={24} /> : <RiMenuFill size={24} />}
+          </button>
+        </div>
+      </nav>
+    </header>
   );
 };
 

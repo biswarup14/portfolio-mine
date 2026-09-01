@@ -25,11 +25,27 @@ const NavBar = ({ theme, toggleTheme }) => {
   }, []);
 
   useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  useEffect(() => {
     setOpen(false);
   }, [location.pathname]);
 
   return (
-    <header className={`navbar ${scrolled ? "scrolled" : ""}`}>
+    <header
+      className={`navbar ${scrolled ? "scrolled" : ""}`}
+      style={{ backgroundColor: theme?.navbarBg }}
+    >
       <nav className="nav-container" aria-label="Primary">
         <Link to="/" className="logo" onClick={() => setOpen(false)}>
           <span className="logo-mark">&lt;/&gt;</span>
@@ -61,6 +77,12 @@ const NavBar = ({ theme, toggleTheme }) => {
           </a>
         </div>
       </ul>
+
+        <div
+          className={`nav-backdrop ${open ? "show" : ""}`}
+          onClick={() => setOpen(false)}
+          aria-hidden="true"
+        ></div>
 
         <div className="nav-actions">
           <button

@@ -88,6 +88,10 @@
   box-shadow: 0 8px 24px var(--accent-glow);
 }
 
+.nav-backdrop {
+  display: none;
+}
+
 @media (min-width: 861px) {
   .nav-links-contact {
     display: none;
@@ -152,10 +156,38 @@
     transform: translateX(0);
   }
 
+  .nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 85;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition), visibility var(--transition);
+  }
+
+  .nav-backdrop.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
   .nav-links li a {
     font-size: 1.1rem;
     padding: 14px 18px;
     width: 100%;
+  }
+
+  .nav-links-contact {
+    margin-top: 8px;
+    width: 100%;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .nav-links-contact .nav-cta {
+    width: 100%;
+    text-align: center;
   }
 
   .nav-actions {

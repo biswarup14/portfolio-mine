@@ -8,7 +8,6 @@ const projects = [
       "A full-stack e-commerce application replicating Amazon's core features including product listings, cart management, and secure checkout with authentication.",
     tech: ["React", "Firebase", "Stripe", "Context API"],
     github: "https://github.com/biswarup14",
-    live: "#",
     featured: true,
   },
   {
@@ -17,7 +16,6 @@ const projects = [
       "A real-time messaging application built with the MERN stack, featuring instant chat, online presence, and media sharing.",
     tech: ["React", "Node.js", "MongoDB", "Socket.io"],
     github: "https://github.com/biswarup14",
-    live: "#",
   },
   {
     title: "Netflix Clone",
@@ -25,7 +23,6 @@ const projects = [
       "A streaming platform UI clone with dynamic content rows, movie trailers, and a smooth, cinematic user experience.",
     tech: ["React", "TMDB API", "CSS"],
     github: "https://github.com/biswarup14",
-    live: "#",
   },
   {
     title: "Zoom Clone",
@@ -33,7 +30,6 @@ const projects = [
       "A video conferencing application allowing users to host and join video calls with real-time audio and video streaming.",
     tech: ["React", "WebRTC", "Socket.io"],
     github: "https://github.com/biswarup14",
-    live: "#",
   },
   {
     title: "Covid-19 Tracker",
@@ -41,7 +37,6 @@ const projects = [
       "A real-time COVID-19 statistics dashboard with interactive charts and global & country-specific data visualizations.",
     tech: ["React", "Chart.js", "REST API"],
     github: "https://github.com/biswarup14",
-    live: "#",
   },
   {
     title: "Facebook Clone",
@@ -49,7 +44,6 @@ const projects = [
       "A social media interface replicating the core Facebook experience with user posts, reactions, and news feeds.",
     tech: ["React", "Firebase", "CSS"],
     github: "https://github.com/biswarup14",
-    live: "#",
   },
 ];
 
@@ -94,14 +88,16 @@ const Works = () => {
                   >
                     <FiGithub size={20} />
                   </a>
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${project.title} live demo`}
-                  >
-                    <FiExternalLink size={20} />
-                  </a>
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${project.title} live demo`}
+                    >
+                      <FiExternalLink size={20} />
+                    </a>
+                  )}
                 </div>
               </div>
 

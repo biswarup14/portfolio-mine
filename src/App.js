@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./components/globalStyles";
-import { lightTheme, darkTheme } from "./components/Theme";
-import useDarkMode from "./components/useDarkMode";
+import { darkTheme } from "./components/Theme";
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import About from "./components/About";
@@ -24,20 +23,17 @@ const ScrollToTop = () => {
 };
 
 const App = () => {
-  const [theme, themeToggler] = useDarkMode();
-  const themeMode = theme === "light" ? lightTheme : darkTheme;
-
   return (
     <Router>
       <ScrollToTop />
       <div className="app">
-        <ThemeProvider theme={themeMode}>
+        <ThemeProvider theme={darkTheme}>
           <>
             <GlobalStyles />
             <a href="#main" className="skip-link">
               Skip to content
             </a>
-            <NavBar theme={theme} toggleTheme={themeToggler} />
+            <NavBar />
             <main id="main" className="app-main">
               <Routes>
                 <Route path="/" element={<Home />} />

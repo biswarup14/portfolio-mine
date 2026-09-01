@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FiHome, FiUser, FiCode, FiFolder, FiMail } from "react-icons/fi";
 import { RiMenuFill, RiCloseLine } from "react-icons/ri";
-import { FaSun, FaMoon } from "react-icons/fa";
 import "./style.css";
 
 const NAV_LINKS = [
@@ -13,7 +12,7 @@ const NAV_LINKS = [
   { to: "/contact", label: "Contact", icon: FiMail },
 ];
 
-const NavBar = ({ theme, toggleTheme }) => {
+const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -42,10 +41,7 @@ const NavBar = ({ theme, toggleTheme }) => {
   }, [location.pathname]);
 
   return (
-    <header
-      className={`navbar ${scrolled ? "scrolled" : ""}`}
-      style={{ backgroundColor: theme?.navbarBg }}
-    >
+    <header className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <nav className="nav-container" aria-label="Primary">
         <Link to="/" className="logo" onClick={() => setOpen(false)}>
           <span className="logo-mark">&lt;/&gt;</span>
@@ -85,14 +81,6 @@ const NavBar = ({ theme, toggleTheme }) => {
         ></div>
 
         <div className="nav-actions">
-          <button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-            title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-          >
-            {theme === "light" ? <FaMoon size={20} /> : <FaSun size={20} />}
-          </button>
           <button
             className="menu-toggle"
             onClick={() => setOpen((o) => !o)}

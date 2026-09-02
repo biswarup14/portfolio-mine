@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
 import { FiArrowRight, FiDownload, FiGithub, FiLinkedin } from "react-icons/fi";
-import { FaXTwitter } from "react-icons/fa6";
 import "./style.css";
 
 const Home = () => {
@@ -26,8 +24,6 @@ const Home = () => {
               sequence={[
                 "Full Stack Developer",
                 2000,
-                "React Specialist",
-                2000,
                 "Problem Solver",
                 2000,
                 "Tech Enthusiast",
@@ -47,9 +43,9 @@ const Home = () => {
           </p>
 
           <div className="home-buttons">
-            <Link to="/works" className="btn btn-primary">
+            <a href="#works" className="btn btn-primary">
               View My Work <FiArrowRight size={18} />
-            </Link>
+            </a>
             <a
               href="/Biswarup_Resume.pdf"
               className="btn btn-outline"
@@ -76,14 +72,7 @@ const Home = () => {
             >
               <FiLinkedin size={20} />
             </a>
-            <a
-              href="https://twitter.com/biswaruprick"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="X (Twitter)"
-            >
-              <FaXTwitter size={18} />
-            </a>
+            
           </div>
         </div>
 
@@ -103,7 +92,7 @@ const Home = () => {
                   {"\n  "}name: <span className="str">"Biswarup"</span>,
                   {"\n  "}role: <span className="str">"Full Stack"</span>,
                   {"\n  "}skills: [<span className="str">"React"</span>,{" "}
-                  <span className="str">"Node"</span>, <span className="str">"Firebase"</span>],
+                  <span className="str">"Node"</span>, <span className="str">"dotNet"</span>],
                   {"\n  "}coffee: <span className="bool">true</span>,
                   {"\n  "}challenge: <span className="fn">"always learning"</span>,
                   {"\n}"};

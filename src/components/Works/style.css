@@ -2,7 +2,7 @@
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
-  padding: 60px 24px;
+  padding: 80px 24px;
   flex: 1;
 }
 
@@ -10,7 +10,12 @@
   color: var(--accent-light);
   font-weight: 600;
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: 4px;
+  transition: color var(--transition-fast);
+}
+
+.inline-link:hover {
+  color: var(--accent-cyan);
 }
 
 .projects-grid {
@@ -20,35 +25,73 @@
 }
 
 .project-card {
+  position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 32px;
+  padding: 36px;
   transition: all var(--transition);
-  animation: fadeUp 0.5s ease both;
   display: flex;
+  opacity: 0;
+  transform: translateY(24px);
+  overflow: hidden;
+}
+
+/* Animated gradient top border */
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+/* Gradient overlay on hover */
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top left, rgba(139, 124, 255, 0.06), transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
+}
+
+.projects-grid.in-view .project-card {
+  animation: fadeUp 0.55s ease forwards;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--border-strong);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3), 0 0 40px rgba(139, 124, 255, 0.08);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card:hover::after {
+  opacity: 1;
 }
 
 .project-card.featured {
   grid-column: span 2;
-  background: linear-gradient(
-    135deg,
-    var(--bg-card),
-    rgba(108, 99, 255, 0.08)
-  );
-  border-color: rgba(108, 99, 255, 0.25);
-}
-
-.project-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--accent);
-  box-shadow: var(--shadow);
+  background: linear-gradient(135deg, var(--bg-card), rgba(139, 124, 255, 0.06));
+  border-color: rgba(139, 124, 255, 0.2);
 }
 
 .project-content {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
 }
 
 .project-top {
@@ -57,18 +100,9 @@
   justify-content: space-between;
 }
 
-.project-emoji {
-  font-size: 2rem;
-}
-
 .project-links {
-  display: flex;
-  gap: 12px;
-}
-
-.project-links a {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,21 +112,29 @@
   transition: all var(--transition);
 }
 
-.project-links a:hover {
-  color: var(--accent-light);
-  border-color: var(--accent);
-  transform: translateY(-2px);
+.project-links:hover {
+  color: #fff;
+  border-color: transparent;
+  background: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px var(--accent-glow);
 }
 
 .project-title {
-  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
   font-weight: 700;
   color: var(--text-primary);
+  transition: color var(--transition-fast);
+}
+
+.project-card:hover .project-title {
+  color: var(--accent-light);
 }
 
 .project-desc {
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.75;
   font-size: 0.98rem;
 }
 
@@ -105,15 +147,22 @@
 
 .project-tech li {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--accent-light);
   background: var(--accent-glow);
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
+  border: 1px solid rgba(139, 124, 255, 0.15);
+  transition: all var(--transition-fast);
+}
+
+.project-card:hover .project-tech li {
+  background: rgba(139, 124, 255, 0.18);
+  border-color: rgba(139, 124, 255, 0.25);
 }
 
 .works-footer {
-  margin-top: 48px;
+  margin-top: 56px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -123,6 +172,7 @@
 
 .works-footer p {
   color: var(--text-secondary);
+  font-size: 1.1rem;
 }
 
 @media (max-width: 700px) {

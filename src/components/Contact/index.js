@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { FiMail, FiPhone, FiMapPin, FiSend } from "react-icons/fi";
+import { FiMail, FiMapPin, FiSend } from "react-icons/fi";
+import useInView from "../../hooks/useInView";
 import "./style.css";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [emailStatus, setEmailStatus] = useState(null);
+  const [containerRef, inView] = useInView();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,13 +26,13 @@ const Contact = () => {
 
   return (
     <section className="contact">
-      <div className="page-header">
+      <div className="page-header reveal">
         <span className="page-tag">&lt;contact /&gt;</span>
         <h1>Get In Touch</h1>
         <p>Have a question or want to work together? Send me a message.</p>
       </div>
 
-      <div className="contact-container">
+      <div className={`contact-container ${inView ? "in-view" : ""}`} ref={containerRef}>
         <div className="contact-info">
           <h2>Let's talk</h2>
           <p className="contact-intro">
@@ -46,8 +48,8 @@ const Contact = () => {
               </div>
               <div>
                 <span className="method-label">Email</span>
-                <a href="mailto:biswarup14rick@gmail.com">
-                  biswarup14rick@gmail.com
+                <a href="mailto:biswarup_b@outlook.com">
+                  biswarup_b@outlook.com
                 </a>
               </div>
             </div>
@@ -62,15 +64,6 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="contact-method">
-              <div className="method-icon">
-                <FiPhone size={20} />
-              </div>
-              <div>
-                <span className="method-label">Phone</span>
-                <a href="tel:+918420157314">+91 8420157314</a>
-              </div>
-            </div>
           </div>
         </div>
 

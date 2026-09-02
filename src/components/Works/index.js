@@ -1,56 +1,59 @@
-import { FiGithub, FiExternalLink } from "react-icons/fi";
+import { FiGithub } from "react-icons/fi";
+import useInView from "../../hooks/useInView";
 import "./style.css";
 
 const projects = [
   {
-    title: "Amazon Clone",
+    title: "Dentist Website",
+    description:
+      "A modern, responsive website for a local dentist, featuring an online appointment booking system and patient information management.",
+    tech: ["React", "Node.js", "CSS"],
+    github: "https://github.com/biswarup14/DocWebapp",
+  },
+  {
+    title:"GATE CS pyq",
+    description:
+      "A web application that provides a comprehensive collection of previous year questions for GATE Computer Science, allowing users to practice and prepare effectively.",
+    tech: ["typescript", "python", "javascript","PostgreSQL"],
+    github: "https://github.com/biswarup14/studyGate"
+  },
+  {
+    title: "Employee Management Website",
+    description:
+      "A web application for managing employee records, including features for adding, updating, and deleting employee information, as well as generating reports.",
+    tech: ["React", "Node.js", "Express", "MongoDB"],
+    github: "https://github.com/biswarup14/Employee-management-System"
+  },
+  {
+    title: "Ecommerce-Amazon Clone",
     description:
       "A full-stack e-commerce application replicating Amazon's core features including product listings, cart management, and secure checkout with authentication.",
     tech: ["React", "Firebase", "Stripe", "Context API"],
-    github: "https://github.com/biswarup14",
-    featured: true,
+    github: "https://github.com/biswarup14/Amazon-Full-Stack-Clone",
   },
+
   {
-    title: "WhatsApp MERN Stack",
-    description:
-      "A real-time messaging application built with the MERN stack, featuring instant chat, online presence, and media sharing.",
-    tech: ["React", "Node.js", "MongoDB", "Socket.io"],
-    github: "https://github.com/biswarup14",
-  },
-  {
-    title: "Netflix Clone",
+    title: "Movie Streaming Platform",
     description:
       "A streaming platform UI clone with dynamic content rows, movie trailers, and a smooth, cinematic user experience.",
     tech: ["React", "TMDB API", "CSS"],
-    github: "https://github.com/biswarup14",
+    github: "https://github.com/biswarup14/Netflix_Clone",
   },
   {
-    title: "Zoom Clone",
+    title: "Video Conferencing App",
     description:
       "A video conferencing application allowing users to host and join video calls with real-time audio and video streaming.",
     tech: ["React", "WebRTC", "Socket.io"],
-    github: "https://github.com/biswarup14",
+    github: "https://github.com/biswarup14/Zoom-NodeJs",
   },
-  {
-    title: "Covid-19 Tracker",
-    description:
-      "A real-time COVID-19 statistics dashboard with interactive charts and global & country-specific data visualizations.",
-    tech: ["React", "Chart.js", "REST API"],
-    github: "https://github.com/biswarup14",
-  },
-  {
-    title: "Facebook Clone",
-    description:
-      "A social media interface replicating the core Facebook experience with user posts, reactions, and news feeds.",
-    tech: ["React", "Firebase", "CSS"],
-    github: "https://github.com/biswarup14",
-  },
+
 ];
 
 const Works = () => {
+  const [gridRef, gridInView] = useInView();
   return (
     <section className="works">
-      <div className="page-header">
+      <div className="page-header reveal">
         <span className="page-tag">&lt;works /&gt;</span>
         <h1>My Work</h1>
         <p>
@@ -67,7 +70,7 @@ const Works = () => {
         </p>
       </div>
 
-      <div className="projects-grid">
+      <div ref={gridRef} className={`projects-grid ${gridInView ? "in-view" : ""}`}>
         {projects.map((project, i) => (
           <article
             className={`project-card ${project.featured ? "featured" : ""}`}
@@ -76,29 +79,15 @@ const Works = () => {
           >
             <div className="project-content">
               <div className="project-top">
-                <div className="project-emoji" aria-hidden="true">
-                  {i % 3 === 0 ? "💻" : i % 3 === 1 ? "📱" : "🌐"}
-                </div>
-                <div className="project-links">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${project.title} source code`}
-                  >
-                    <FiGithub size={20} />
-                  </a>
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${project.title} live demo`}
-                    >
-                      <FiExternalLink size={20} />
-                    </a>
-                  )}
-                </div>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${project.title} source code`}
+                  className="project-links"
+                >
+                  <FiGithub size={20} />
+                </a>
               </div>
 
               <h2 className="project-title">{project.title}</h2>

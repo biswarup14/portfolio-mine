@@ -2,32 +2,34 @@
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
-  padding: 60px 24px;
+  padding: 80px 24px;
   flex: 1;
 }
 
 .skills-container {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 56px;
 }
 
 .skills-title {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 1.3rem;
+  gap: 14px;
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
   font-weight: 700;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .skills-badge {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--accent-light);
   background: var(--accent-glow);
-  padding: 4px 12px;
-  border-radius: 8px;
+  padding: 5px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
 }
 
 .skills-grid {
@@ -40,27 +42,56 @@
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 22px;
   transition: all var(--transition);
-  animation: fadeUp 0.5s ease both;
+  opacity: 0;
+  transform: translateY(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.skills-grid.in-view .skill-card {
+  animation: fadeUp 0.5s ease forwards;
 }
 
 .skill-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent);
-  box-shadow: var(--shadow);
+  transform: translateY(-6px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-glow);
+}
+
+.skill-card:hover::before {
+  opacity: 1;
+}
+
+.skill-card:hover .skill-icon {
+  color: var(--accent-light);
+  transform: scale(1.15);
 }
 
 .skill-card-head {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: 14px;
+  margin-bottom: 16px;
 }
 
 .skill-icon {
   color: var(--accent-light);
   flex-shrink: 0;
+  transition: all var(--transition);
 }
 
 .skill-name {
@@ -71,7 +102,8 @@
 .skill-level {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--accent-light);
+  font-weight: 500;
 }
 
 .skill-bar {
@@ -85,37 +117,87 @@
   height: 100%;
   background: var(--gradient);
   border-radius: 4px;
-  transition: width 1s ease;
+  transition: width 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 16px var(--accent-glow);
+  position: relative;
+}
+
+.skill-bar-fill::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -2px;
+  bottom: -2px;
+  width: 8px;
+  background: #fff;
+  border-radius: 4px;
+  opacity: 0.6;
+  filter: blur(2px);
 }
 
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 20px;
+  gap: 16px;
 }
 
 .tool-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 24px 16px;
+  gap: 14px;
+  padding: 28px 16px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   font-weight: 600;
+  font-size: 0.95rem;
   color: var(--text-secondary);
   transition: all var(--transition);
   text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gradient);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.tools-grid.in-view .tool-card {
+  animation: fadeUp 0.5s ease forwards;
 }
 
 .tool-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent);
+  transform: translateY(-6px);
+  border-color: var(--border-strong);
   color: var(--text-primary);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-glow);
+}
+
+.tool-card:hover::before {
+  opacity: 0.05;
+}
+
+.tool-card:hover .tool-icon {
+  color: var(--accent-light);
+  transform: scale(1.2);
 }
 
 .tool-icon {
   color: var(--accent-light);
+  transition: all var(--transition);
+  position: relative;
+  z-index: 1;
+}
+
+.tool-card span {
+  position: relative;
+  z-index: 1;
 }

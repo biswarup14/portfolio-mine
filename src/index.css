@@ -1,22 +1,38 @@
 :root {
-  --bg-primary: #0a0a1a;
-  --bg-secondary: #111128;
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --bg-card-hover: rgba(255, 255, 255, 0.06);
-  --text-primary: #e8e8f0;
-  --text-secondary: #9898b0;
-  --text-muted: #686888;
-  --accent: #6c63ff;
-  --accent-light: #8b83ff;
-  --accent-glow: rgba(108, 99, 255, 0.3);
-  --gradient: linear-gradient(135deg, #6c63ff, #48c6ef);
-  --border: rgba(255, 255, 255, 0.06);
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --radius: 12px;
-  --radius-lg: 20px;
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --bg-primary: #06060e;
+  --bg-secondary: #0c0c1a;
+  --bg-card: rgba(255, 255, 255, 0.035);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+  --text-primary: #f0f1ff;
+  --text-secondary: #8e95b9;
+  --text-muted: #525878;
+  --accent: #8b7cff;
+  --accent-light: #b0a8ff;
+  --accent-glow: rgba(139, 124, 255, 0.3);
+  --accent-pink: #ff6baa;
+  --accent-pink-glow: rgba(255, 107, 170, 0.25);
+  --accent-cyan: #48c6ef;
+  --gradient: linear-gradient(135deg, #8b7cff, #48c6ef, #00d4aa);
+  --gradient-vivid: linear-gradient(135deg, #8b7cff 0%, #ff6baa 50%, #48c6ef 100%);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(139, 124, 255, 0.35);
+  --border-glow: rgba(139, 124, 255, 0.5);
+  --shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 8px 40px rgba(139, 124, 255, 0.15);
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'Fira Code', monospace;
+}
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 135deg;
+  inherits: false;
 }
 
 * {
@@ -33,7 +49,6 @@ html {
   html {
     scroll-behavior: auto;
   }
-
   *,
   *::before,
   *::after {
@@ -71,6 +86,11 @@ button {
   font-family: inherit;
   cursor: pointer;
   border: none;
+  background: none;
+}
+
+input, textarea {
+  font-family: inherit;
 }
 
 a:focus-visible,
@@ -79,12 +99,12 @@ input:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 ::selection {
   background: var(--accent);
-  color: white;
+  color: #fff;
 }
 
 ::-webkit-scrollbar {
@@ -96,8 +116,8 @@ textarea:focus-visible,
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 4px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-cyan));
+  border-radius: 10px;
 }
 
 .skip-link {
@@ -105,7 +125,7 @@ textarea:focus-visible,
   top: -100%;
   left: 0;
   background: var(--accent);
-  color: white;
+  color: #fff;
   padding: 8px 16px;
   z-index: 9999;
   border-radius: 0 0 var(--radius) 0;
@@ -117,61 +137,135 @@ textarea:focus-visible,
   top: 0;
 }
 
-/* ---- Shared page styles (used across About / Skills / Works / Contact) ---- */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* ---- Shared page styles ---- */
 
 .page-header {
   text-align: center;
-  margin-bottom: 48px;
-  animation: fadeUp 0.6s ease forwards;
+  margin-bottom: 56px;
 }
 
 .page-tag {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--accent-light);
   background: var(--accent-glow);
-  padding: 6px 16px;
-  border-radius: 20px;
-  margin-bottom: 16px;
+  padding: 6px 18px;
+  border-radius: 24px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-strong);
+  letter-spacing: 0.05em;
 }
 
 .page-header h1 {
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 12px;
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+  background: linear-gradient(135deg, #ffffff 0%, var(--accent-light) 50%, var(--accent-cyan) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .page-header p {
   color: var(--text-secondary);
   font-size: 1.1rem;
+  max-width: 520px;
+  margin: 0 auto;
 }
+
+/* ---- Buttons ---- */
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 14px 28px;
-  border-radius: 12px;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: 14px;
   font-weight: 600;
   font-size: 1rem;
   transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-primary {
   background: var(--gradient);
+  background-size: 200% 200%;
   color: #fff;
-  box-shadow: 0 4px 20px var(--accent-glow);
+  box-shadow: 0 4px 24px var(--accent-glow);
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px var(--accent-glow);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 40px var(--accent-glow), 0 0 60px rgba(139, 124, 255, 0.1);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+/* ---- Scroll reveal ---- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: revealUp 0.8s ease forwards;
+}
+
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeScale {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideFromLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideFromRight {
+  from { opacity: 0; transform: translateX(32px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  33% { transform: translateY(-16px) translateX(12px); }
+  66% { transform: translateY(-8px) translateX(-8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes gradient-spin {
+  from { --gradient-angle: 0deg; }
+  to { --gradient-angle: 360deg; }
 }

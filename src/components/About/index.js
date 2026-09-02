@@ -1,23 +1,25 @@
-import { Link } from "react-router-dom";
 import {
   FiBriefcase,
   FiTarget,
   FiArrowRight,
 } from "react-icons/fi";
 import { FaGraduationCap } from "react-icons/fa";
+import useInView from "../../hooks/useInView";
 import "./style.css";
 
 const About = () => {
+  const [gridRef, gridInView] = useInView();
+
   return (
     <section className="about">
-      <div className="page-header">
+      <div className="page-header reveal">
         <span className="page-tag">&lt;about /&gt;</span>
         <h1>About Me</h1>
         <p>Learn a little more about who I am and what drives me.</p>
       </div>
 
       <div className="about-container">
-        <div className="about-card intro-card">
+        <div className={`about-card intro-card ${gridInView ? "in-view" : ""}`}>
           <div className="about-emoji" aria-hidden="true">🚀</div>
           <h2>Passionate Developer</h2>
           <p>
@@ -33,8 +35,8 @@ const About = () => {
           </p>
         </div>
 
-        <div className="about-grid">
-          <div className="about-card">
+        <div className="about-grid" ref={gridRef}>
+          <div className={`about-card ${gridInView ? "in-view" : ""}`} style={{ animationDelay: "0.1s" }}>
             <div className="card-icon">
               <FaGraduationCap size={24} />
             </div>
@@ -47,7 +49,7 @@ const About = () => {
             </p>
           </div>
 
-          <div className="about-card">
+          <div className={`about-card ${gridInView ? "in-view" : ""}`} style={{ animationDelay: "0.2s" }}>
             <div className="card-icon">
               <FiBriefcase size={24} />
             </div>
@@ -60,7 +62,7 @@ const About = () => {
             </ul>
           </div>
 
-          <div className="about-card">
+          <div className={`about-card ${gridInView ? "in-view" : ""}`} style={{ animationDelay: "0.3s" }}>
             <div className="card-icon">
               <FiTarget size={24} />
             </div>
@@ -73,15 +75,15 @@ const About = () => {
             </ul>
           </div>
 
-          <div className="about-card cta-card">
+          <div className={`about-card cta-card ${gridInView ? "in-view" : ""}`} style={{ animationDelay: "0.4s" }}>
             <h3>Let's work together</h3>
             <p>
               Have a project in mind or just want to say hi? I'd love to hear
               from you.
             </p>
-            <Link to="/contact" className="btn btn-primary">
+            <a href="#contact" className="btn btn-primary">
               Get In Touch <FiArrowRight size={18} />
-            </Link>
+            </a>
           </div>
         </div>
       </div>

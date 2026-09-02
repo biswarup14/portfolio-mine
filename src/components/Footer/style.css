@@ -1,9 +1,38 @@
 .footer {
+  position: relative;
   width: 100%;
-  border-top: 1px solid var(--border);
-  padding: 28px 24px;
+  padding: 40px 24px;
   margin-top: auto;
-  background: var(--bg-card);
+  background: rgba(6, 6, 14, 0.5);
+  border-top: 1px solid var(--border);
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient);
+  opacity: 0.5;
+}
+
+/* Shimmer effect on the gradient line */
+.footer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -50%; }
+  100% { left: 150%; }
 }
 
 .footer-container {
@@ -12,7 +41,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
   text-align: center;
 }
 
@@ -22,23 +51,39 @@
 }
 
 .footer-socials a {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
+  border-radius: 14px;
   border: 1px solid var(--border);
   background: var(--bg-card-hover);
   color: var(--text-secondary);
   transition: all var(--transition);
+  position: relative;
+}
+
+.footer-socials a::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 15px;
+  background: var(--gradient);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--transition-fast);
 }
 
 .footer-socials a:hover {
-  color: var(--accent-light);
-  border-color: var(--accent);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 16px var(--accent-glow);
+  color: #fff;
+  border-color: transparent;
+  transform: translateY(-4px) rotate(3deg);
+  box-shadow: 0 8px 24px var(--accent-glow);
+}
+
+.footer-socials a:hover::before {
+  opacity: 1;
 }
 
 .footer-copy {
@@ -53,4 +98,13 @@
 .heart {
   color: #ff5f57;
   vertical-align: middle;
+  display: inline-block;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.2); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
 }
